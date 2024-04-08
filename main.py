@@ -2,7 +2,11 @@ import pygame
 import random
 
 pygame.init()
+pygame.font.init()
+game_font = pygame.font.SysFont('Счёт: 0', 30)
 
+
+count = 0
 screen_width = 800
 screen_height = 600
 screen = pygame.display.set_mode((screen_width, screen_height))
@@ -31,6 +35,11 @@ while running:
             if target_x < mouse_x < target_x + target_width and target_y < mouse_y < target_y + target_height:
                 target_x = random.randint(0, screen_width - target_width)
                 target_y = random.randint(0, screen_height - target_height)
+                count += 1
+
+    text_surface = game_font.render(f'Счёт: {count}', False, (0, 0, 0))
+    screen.blit(text_surface, (0, 0))
+
     screen.blit(target_img, (target_x, target_y))
     pygame.display.update()
 
